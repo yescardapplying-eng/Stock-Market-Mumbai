@@ -1,16 +1,19 @@
 import type { Metadata } from 'next';
 import LegalPageLayout from '@/components/legal/LegalPageLayout';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Copyright Policy | Stock Market Mumbai',
-  description: 'Intellectual property and educational content usage guidelines for stockmarketmumbai.in.',
-  alternates: { canonical: 'https://stockmarketmumbai.in/copyright-policy' },
-};
+  description:
+    'Copyright Policy detailing content ownership, permitted personal study usage and redistribution restrictions on stockmarketmumbai.in.',
+  path: '/copyright-policy',
+});
 
 export default function Page() {
   return (
     <LegalPageLayout
-      title="Copyright & Content Usage Policy"
+      title="Copyright Policy"
+      path="/copyright-policy"
       lastUpdated="November 2026"
       sections={[
         {
@@ -19,7 +22,7 @@ export default function Page() {
         },
         {
           title: 'Permitted Personal Study',
-          content: <p>Enrolled students may download PDFs strictly for personal offline study and revision.</p>,
+          content: <p>Enrolled students may use provided notes strictly for personal offline study and revision.</p>,
         },
         {
           title: 'Prohibited Redistribution',
@@ -34,4 +37,3 @@ export default function Page() {
     />
   );
 }
-

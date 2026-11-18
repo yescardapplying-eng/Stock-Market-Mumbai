@@ -2,9 +2,18 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Clock, ShieldAlert } from 'lucide-react';
+import { Clock, ShieldAlert, Calendar, BookOpen, Calculator } from 'lucide-react';
 import AccordionFaq from '@/components/ui/AccordionFaq';
 import { BLOG_POSTS } from '@/data/blogArticles';
+import {
+  DEFAULT_OG_IMAGE,
+  SITE_NAME,
+  SITE_URL,
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+  canonicalUrl,
+  safeJsonLd,
+} from '@/lib/seo';
 
 export async function generateStaticParams() {
   return BLOG_POSTS.map((p) => ({ slug: p.slug }));
@@ -17,14 +26,21 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = BLOG_POSTS.find((p) => p.slug === slug);
-  if (!post) return { title: 'Article Not Found' };
+  if (!post) {
+    return {
+      title: { absolute: 'Article Not Found | Stock Market Mumbai' },
+      robots: { index: false, follow: true },
+    };
+  }
 
-  return {
-    title: `${post.title} | Stock Market Mumbai`,
+  return buildPageMetadata({
+    title: post.seoTitle,
     description: post.excerpt,
-    keywords: post.keywords,
-    alternates: { canonical: `https://stockmarketmumbai.in/blog/${post.slug}` },
-  };
+    path: `/blog/${post.slug}`,
+    type: 'article',
+    publishedTime: post.publishedDate,
+    modifiedTime: post.lastUpdated,
+  });
 }
 
 export default async function BlogDetailPage({
@@ -35,6 +51,40 @@ export default async function BlogDetailPage({
   const { slug } = await params;
   const post = BLOG_POSTS.find((p) => p.slug === slug);
   if (!post) notFound();
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ]);
+
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
+    datePublished: post.publishedDate,
+    dateModified: post.lastUpdated,
+    author: {
+      '@type': 'Organization',
+      name: post.authorName,
+      url: SITE_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/images/brand/stock-market-mumbai-logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl(`/blog/${post.slug}`),
+    },
+  };
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -50,7 +100,15 @@ export default async function BlogDetailPage({
     <div className="bg-[#F8FAFC] min-h-screen py-10 sm:py-14">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
       />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav aria-label="Breadcrumb" className="mb-6">
@@ -59,7 +117,9 @@ export default async function BlogDetailPage({
             <li>/</li>
             <li><Link href="/blog" className="hover:text-[#16A34A]">Blog</Link></li>
             <li>/</li>
-            <li className="text-[#0B2545] font-semibold truncate max-w-[180px] sm:max-w-none">{post.title}</li>
+            <li className="text-[#0B2545] font-semibold truncate max-w-[180px] sm:max-w-none" aria-current="page">
+              {post.title}
+            </li>
           </ol>
         </nav>
 
@@ -69,15 +129,20 @@ export default async function BlogDetailPage({
               {post.category}
             </span>
             <span className="inline-flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5" />
+              <Clock className="w-3.5 h-3.5" aria-hidden="true" />
               {post.readTime}
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <Calendar className="w-3.5 h-3.5" aria-hidden="true" />
+              Published: {post.publishedDate}
             </span>
             <span>Updated: {post.lastUpdated}</span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0B2545] mb-4 leading-tight">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0B2545] mb-3 leading-tight">
             {post.title}
           </h1>
+          <p className="text-xs text-slate-400 mb-4">By {post.authorName}</p>
           <p className="text-sm sm:text-base text-slate-600 mb-8 leading-relaxed">{post.excerpt}</p>
 
           <div className="space-y-6">
@@ -89,10 +154,38 @@ export default async function BlogDetailPage({
             ))}
           </div>
 
+          {/* Contextual Related Guide & Tool Links */}
+          <div className="mt-8 pt-6 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Link
+              href={post.relatedGuide.href}
+              className="p-4 rounded-2xl bg-[#F8FAFC] border border-slate-200 hover:border-[#16A34A] transition-colors flex items-start gap-3"
+            >
+              <BookOpen className="w-5 h-5 text-[#16A34A] shrink-0 mt-0.5" aria-hidden="true" />
+              <div>
+                <span className="text-[11px] font-bold uppercase text-slate-400 block">
+                  Comprehensive Guide
+                </span>
+                <span className="text-sm font-bold text-[#0B2545]">{post.relatedGuide.title} &rarr;</span>
+              </div>
+            </Link>
+            <Link
+              href={post.relatedTool.href}
+              className="p-4 rounded-2xl bg-[#F8FAFC] border border-slate-200 hover:border-[#16A34A] transition-colors flex items-start gap-3"
+            >
+              <Calculator className="w-5 h-5 text-[#16A34A] shrink-0 mt-0.5" aria-hidden="true" />
+              <div>
+                <span className="text-[11px] font-bold uppercase text-slate-400 block">
+                  Related Calculator
+                </span>
+                <span className="text-sm font-bold text-[#0B2545]">{post.relatedTool.title} &rarr;</span>
+              </div>
+            </Link>
+          </div>
+
           <div className="mt-8 bg-amber-50 rounded-2xl p-4 border border-amber-200 text-xs text-amber-900 flex items-start gap-2.5">
-            <ShieldAlert className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
+            <ShieldAlert className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" aria-hidden="true" />
             <span>
-              <strong>Educational Note:</strong> Strictly informational. Stock Market Mumbai provides zero buy/sell tips or advisory calls.
+              <strong>Educational Note:</strong> Strictly informational. Numerical illustrations are hypothetical examples only. Stock Market Mumbai provides zero stock tips, buy/sell calls, or investment advice.
             </span>
           </div>
         </article>
@@ -107,4 +200,3 @@ export default async function BlogDetailPage({
     </div>
   );
 }
-

@@ -1,30 +1,33 @@
 import React from 'react';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import AccordionFaq from '@/components/ui/AccordionFaq';
+import { safeJsonLd } from '@/lib/seo';
 
 const HOMEPAGE_FAQS = [
   {
-    q: 'What is Stock Market Mumbai?',
-    a: 'Stock Market Mumbai (stockmarketmumbai.in) is a 100% educational training platform for Mumbai learners. We teach chart reading, price action, option chain analysis, and mathematical capital risk control.',
+    q: 'Are Stock Market Mumbai classes conducted online or in a physical classroom?',
+    a: 'Stock Market Mumbai operates 100% online. Learners living across Mumbai and nearby areas attend interactive online sessions and access recorded lessons remotely without commuting to a physical center.',
   },
   {
-    q: 'Do you provide stock tips or buy/sell calls?',
-    a: 'No. We never provide stock tips, intraday calls, or investment advisory. We are an educational academy focused on helping traders control losses and analyze markets independently.',
+    q: 'Do you provide stock tips, intraday calls, or investment advisory?',
+    a: 'No. We never provide stock tips, buy/sell calls, or investment advice. Our sole focus is structured stock market education covering chart reading, derivatives concepts, and risk management.',
   },
   {
-    q: 'Are your Mumbai stock market classes beginner-friendly?',
-    a: 'Yes. Our Basic Plan starts from zero — covering demat basics, NSE/BSE order matching, candlestick patterns, and stop-loss calculation in English, Hindi, and Marathi.',
+    q: 'Can complete beginners in Mumbai join these online stock market courses?',
+    a: 'Yes. The Basic Plan begins from market fundamentals — NSE and BSE basics, Demat and order types, candlestick structure, and risk sizing — with no prior finance degree required.',
   },
   {
-    q: 'What are your course packages and durations?',
-    a: 'We offer three structured programs: Basic Plan (₹24,999 / 1 Month), Our Pro Plan (₹55,999 / 6 Months), and Ultra Pro Plan (₹95,999 / 1 Year).',
+    q: 'What are the course packages and durations offered?',
+    a: 'We offer three online learning plans: Basic Plan (₹24,999 for 1 Month), Our Pro Plan (₹55,999 for 6 Months), and Ultra Pro Plan (₹95,999 for 1 Year).',
   },
   {
-    q: 'How do your courses help control capital loss?',
-    a: 'From Day 1, we teach strict position sizing, the 1% per-trade risk rule, daily drawdown limits, and objective trade journaling so learners protect their capital.',
+    q: 'Does completing a stock market course guarantee trading profits?',
+    a: 'No. Financial markets always carry risk of capital loss, and no educational program can guarantee profits or fixed returns. Our courses focus on building analytical skills and risk awareness.',
   },
   {
-    q: 'Can working professionals in Mumbai attend sessions?',
-    a: 'Yes. Live interactive cohorts run in convenient evening and weekend slots, backed by 24/7 HD recorded lectures and dedicated doubt-clearing calls.',
+    q: 'Can working professionals in Mumbai attend online classes after office hours?',
+    a: 'Yes. Online sessions are planned to accommodate students and working professionals, backed by recorded lectures available during your active plan period.',
   },
 ];
 
@@ -46,7 +49,7 @@ export default function HomepageFaqs() {
     <section className="py-14 sm:py-20 bg-white border-b border-slate-200">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
       />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 reveal-on-scroll">
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
@@ -57,14 +60,23 @@ export default function HomepageFaqs() {
             Frequently Asked Questions
           </h2>
           <p className="mt-3 text-sm sm:text-base text-[#1E293B]/80">
-            Clear answers about our Mumbai stock market courses and educational ethics.
+            Quick answers about our online stock market courses, fees, and non-advisory learning approach.
           </p>
         </div>
 
         {/* All 6 FAQs start closed; opening one smoothly closes the previous */}
         <AccordionFaq items={HOMEPAGE_FAQS} defaultOpenIndex={null} />
+
+        <div className="text-center mt-8">
+          <Link
+            href="/faqs"
+            className="btn-smooth touch-target inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#0B2545] hover:bg-[#13345E] text-white text-xs sm:text-sm font-bold"
+          >
+            <span>All FAQs</span>
+            <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
-

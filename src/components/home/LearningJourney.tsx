@@ -4,23 +4,23 @@ import { CheckCircle2 } from 'lucide-react';
 const STEPS = [
   {
     step: '01',
-    title: 'Market Basics',
-    desc: 'Learn NSE, BSE, demat rules, and order placement without risking money.',
+    title: 'Market Fundamentals',
+    desc: 'Learn NSE, BSE, Demat mechanics, order types, and market terminology step by step.',
   },
   {
     step: '02',
-    title: 'Chart Reading',
-    desc: 'Identify clean trends, support-resistance zones, and candlestick patterns.',
+    title: 'Chart Literacy',
+    desc: 'Study candlesticks, trend structure, support-resistance zones, and volume context.',
   },
   {
     step: '03',
-    title: 'Risk Sizing',
-    desc: 'Calculate exact stop-loss points and 1% capital limits mathematically.',
+    title: 'Core Modules',
+    desc: 'Progress to fundamental ratios, derivatives concepts, and option chain analysis by plan.',
   },
   {
     step: '04',
-    title: 'Disciplined Practice',
-    desc: 'Review paper journals weekly with Mumbai mentors to eliminate mistakes.',
+    title: 'Risk & Practice',
+    desc: 'Apply position-sizing math, stop-loss rules, and objective study journals responsibly.',
   },
 ];
 

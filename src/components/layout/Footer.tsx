@@ -21,20 +21,21 @@ export default function Footer() {
               <div className="bg-white p-2.5 rounded-xl inline-block brand-logo-footer shadow-md">
                 <Image
                   src="/images/brand/stock-market-mumbai-logo.png"
-                  alt="Stock Market Mumbai — Stock Market Education"
+                  alt="Stock Market Mumbai logo"
                   width={1024}
                   height={341}
+                  loading="lazy"
                   className="w-full h-auto object-contain"
                 />
               </div>
             </Link>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Structured stock market education for Mumbai learners. Master price action, option chain, and risk control without tips or advisory noise.
+              Online stock market education for Mumbai learners. Learn market basics, price action, option chain concepts, and risk management without stock tips or advisory noise.
             </p>
             <div className="pt-1 text-xs">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#13345E] text-[#22C55E] font-semibold border border-[#16A34A]/30">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />
-                100% Educational Platform
+                Online Educational Platform
               </span>
             </div>
           </div>
@@ -175,13 +176,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 5: Mumbai Contact & Social */}
+          {/* Column 5: Online Desk & Social */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-white">Mumbai Center</h3>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-white">Online Desk</h3>
             <ul className="space-y-2.5 text-sm text-slate-300">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#22C55E] shrink-0 mt-0.5" aria-hidden="true" />
-                <span>Mumbai, Maharashtra, India</span>
+                <span>Online Classes • Mumbai, Maharashtra, India</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#22C55E] shrink-0" aria-hidden="true" />

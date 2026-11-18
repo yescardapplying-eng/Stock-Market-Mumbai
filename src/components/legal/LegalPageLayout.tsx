@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Scale, AlertCircle } from 'lucide-react';
 import AccordionFaq, { FaqItem } from '@/components/ui/AccordionFaq';
+import { buildBreadcrumbSchema, safeJsonLd } from '@/lib/seo';
 
 interface LegalSection {
   title: string;
@@ -10,6 +11,7 @@ interface LegalSection {
 
 interface LegalPageLayoutProps {
   title: string;
+  path: string;
   lastUpdated: string;
   sections: LegalSection[];
   faqs: FaqItem[];
@@ -17,10 +19,16 @@ interface LegalPageLayoutProps {
 
 export default function LegalPageLayout({
   title,
+  path,
   lastUpdated,
   sections,
   faqs,
 }: LegalPageLayoutProps) {
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: title, path },
+  ]);
+
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -38,9 +46,11 @@ export default function LegalPageLayout({
     <div className="bg-[#F8FAFC] min-h-screen py-10 sm:py-14">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c'),
-        }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,7 +68,7 @@ export default function LegalPageLayout({
 
         <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm mb-8 animate-fade-in-up">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#DCFCE7] text-[#15803D] mb-3">
-            <Scale className="w-3.5 h-3.5" />
+            <Scale className="w-3.5 h-3.5" aria-hidden="true" />
             Official Policy
           </span>
           <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0B2545] tracking-tight">
@@ -70,10 +80,10 @@ export default function LegalPageLayout({
         </div>
 
         <div className="bg-amber-50 rounded-2xl p-5 border border-amber-200 mb-8 text-xs text-amber-900 leading-relaxed flex items-start gap-3 reveal-on-scroll">
-          <AlertCircle className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
+          <AlertCircle className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" aria-hidden="true" />
           <div>
             <strong>Educational Compliance: </strong>
-            Stock Market Mumbai operates strictly as an educational training platform and is not SEBI-registered for advisory or research calls.
+            Stock Market Mumbai operates strictly as an online educational training platform and does not provide investment advisory, brokerage, or buy/sell research calls.
           </div>
         </div>
 
@@ -101,4 +111,3 @@ export default function LegalPageLayout({
     </div>
   );
 }
-

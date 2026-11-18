@@ -1,19 +1,21 @@
 import { MetadataRoute } from 'next';
 import { BLOG_POSTS } from '@/data/blogArticles';
+import { SITE_URL } from '@/lib/seo';
+
+const LAST_CONTENT_UPDATE = '2026-11-18';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://stockmarketmumbai.in').replace(/\/$/, '');
-  const currentDate = new Date().toISOString().split('T')[0];
+  const baseUrl = SITE_URL;
 
   const mainPages: MetadataRoute.Sitemap = [
-    { url: `${baseUrl}`, lastModified: currentDate, changeFrequency: 'daily', priority: 1.0 },
-    { url: `${baseUrl}/our-services`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${baseUrl}/about-us`, lastModified: currentDate, changeFrequency: 'monthly', priority: 0.85 },
-    { url: `${baseUrl}/our-packages`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.95 },
-    { url: `${baseUrl}/contact-us`, lastModified: currentDate, changeFrequency: 'monthly', priority: 0.85 },
+    { url: baseUrl, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'weekly', priority: 1.0 },
+    { url: `${baseUrl}/our-services`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${baseUrl}/about-us`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/our-packages`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${baseUrl}/contact-us`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'monthly', priority: 0.8 },
   ];
 
-  const educationalPages = [
+  const educationalPages: MetadataRoute.Sitemap = [
     'stock-market-basics',
     'technical-analysis',
     'fundamental-analysis',
@@ -29,12 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'swing-trading-explained',
   ].map((slug) => ({
     url: `${baseUrl}/${slug}`,
-    lastModified: currentDate,
-    changeFrequency: 'weekly' as const,
+    lastModified: LAST_CONTENT_UPDATE,
+    changeFrequency: 'monthly' as const,
     priority: 0.85,
   }));
 
-  const toolsPages = [
+  const toolsPages: MetadataRoute.Sitemap = [
     'tools',
     'tools/position-sizing-calculator',
     'tools/risk-reward-calculator',
@@ -44,25 +46,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'tools/compound-interest-calculator',
   ].map((path) => ({
     url: `${baseUrl}/${path}`,
-    lastModified: currentDate,
+    lastModified: LAST_CONTENT_UPDATE,
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
 
-  const resourcePages = [
-    { url: `${baseUrl}/faqs`, lastModified: currentDate, changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: `${baseUrl}/resources`, lastModified: currentDate, changeFrequency: 'weekly' as const, priority: 0.8 },
-    { url: `${baseUrl}/blog`, lastModified: currentDate, changeFrequency: 'daily' as const, priority: 0.85 },
+  const resourcePages: MetadataRoute.Sitemap = [
+    { url: `${baseUrl}/faqs`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/resources`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${baseUrl}/blog`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'weekly', priority: 0.8 },
   ];
 
-  const blogPages = BLOG_POSTS.map((post) => ({
+  const blogPages: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: post.lastUpdated,
     changeFrequency: 'monthly' as const,
     priority: 0.75,
   }));
 
-  const legalPages = [
+  const legalPages: MetadataRoute.Sitemap = [
     'privacy-policy',
     'terms-and-conditions',
     'risk-disclosure',
@@ -73,9 +75,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'copyright-policy',
   ].map((slug) => ({
     url: `${baseUrl}/${slug}`,
-    lastModified: currentDate,
+    lastModified: LAST_CONTENT_UPDATE,
     changeFrequency: 'yearly' as const,
-    priority: 0.5,
+    priority: 0.4,
   }));
 
   return [
@@ -87,4 +89,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...legalPages,
   ];
 }
-

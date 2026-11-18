@@ -1,16 +1,19 @@
 import type { Metadata } from 'next';
 import LegalPageLayout from '@/components/legal/LegalPageLayout';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Privacy Policy | Stock Market Mumbai',
-  description: 'Privacy Policy detailing how Stock Market Mumbai collects and safeguards student inquiry data.',
-  alternates: { canonical: 'https://stockmarketmumbai.in/privacy-policy' },
-};
+  description:
+    'Privacy Policy explaining what enquiry data Stock Market Mumbai collects, how it is used, retention practices and privacy contact options.',
+  path: '/privacy-policy',
+});
 
 export default function Page() {
   return (
     <LegalPageLayout
       title="Privacy Policy"
+      path="/privacy-policy"
       lastUpdated="November 2026"
       sections={[
         {
@@ -19,11 +22,11 @@ export default function Page() {
         },
         {
           title: 'Purpose of Use',
-          content: <p>Submitted contact details are used solely by our Mumbai academic counseling team to share course schedules, syllabus details, and respond to your inquiries.</p>,
+          content: <p>Submitted contact details are used solely by our online academic counseling team to share course schedules, syllabus details, and respond to your inquiries.</p>,
         },
         {
           title: 'Zero Third-Party Selling & Account Safety',
-          content: <p>Stock Market Mumbai never sells student data and will never request demat passwords, broker logins, or OTPs.</p>,
+          content: <p>Stock Market Mumbai never sells student data and will never request Demat passwords, broker logins, or OTPs.</p>,
         },
       ]}
       faqs={[
@@ -34,4 +37,3 @@ export default function Page() {
     />
   );
 }
-

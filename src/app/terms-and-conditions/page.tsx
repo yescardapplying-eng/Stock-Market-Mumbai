@@ -1,16 +1,19 @@
 import type { Metadata } from 'next';
 import LegalPageLayout from '@/components/legal/LegalPageLayout';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Terms & Conditions | Stock Market Mumbai',
-  description: 'Terms and Conditions governing educational enrollment and usage of stockmarketmumbai.in.',
-  alternates: { canonical: 'https://stockmarketmumbai.in/terms-and-conditions' },
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Terms and Conditions | Stock Market Mumbai',
+  description:
+    'Terms and Conditions summarizing website usage, online course access rules, user obligations and jurisdiction for Stock Market Mumbai.',
+  path: '/terms-and-conditions',
+});
 
 export default function Page() {
   return (
     <LegalPageLayout
       title="Terms and Conditions"
+      path="/terms-and-conditions"
       lastUpdated="November 2026"
       sections={[
         {
@@ -27,11 +30,10 @@ export default function Page() {
         },
       ]}
       faqs={[
-        { q: 'Does enrolling in a course make Stock Market Mumbai my adviser?', a: 'No. We are purely an educational institute and provide zero advisory or buy/sell recommendations.' },
-        { q: 'Can I share my portal login with friends?', a: 'No. Course access is strictly individual for the enrolled Mumbai learner.' },
+        { q: 'Does enrolling in a course make Stock Market Mumbai my adviser?', a: 'No. We are purely an online educational platform and provide zero advisory or buy/sell recommendations.' },
+        { q: 'Can I share my portal login with friends?', a: 'No. Course access is strictly individual for the enrolled learner.' },
         { q: 'Where are legal disputes governed?', a: 'All terms are governed under Indian law within Mumbai, Maharashtra jurisdiction.' },
       ]}
     />
   );
 }
-

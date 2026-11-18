@@ -1,16 +1,19 @@
 import type { Metadata } from 'next';
 import LegalPageLayout from '@/components/legal/LegalPageLayout';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Grievance Redressal | Stock Market Mumbai',
-  description: 'Student support and grievance escalation process for Stock Market Mumbai.',
-  alternates: { canonical: 'https://stockmarketmumbai.in/grievance-redressal' },
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Grievance Redressal Policy | Stock Market Mumbai',
+  description:
+    'Grievance Redressal Policy outlining student support channels, response timelines and misconduct reporting at Stock Market Mumbai.',
+  path: '/grievance-redressal',
+});
 
 export default function Page() {
   return (
     <LegalPageLayout
-      title="Grievance Redressal"
+      title="Grievance Redressal Policy"
+      path="/grievance-redressal"
       lastUpdated="November 2026"
       sections={[
         {
@@ -28,10 +31,9 @@ export default function Page() {
       ]}
       faqs={[
         { q: 'How do I report an impersonator offering tips in your name?', a: 'Email screenshots immediately to info@stockmarketmumbai.in so we can take action and warn learners.' },
-        { q: 'What is the typical response time for student grievances?', a: 'We acknowledge tickets within 24 hours and resolve most academic issues within 3–5 business days.' },
-        { q: 'Where is your administrative desk based?', a: 'Our academic coordination desk operates in Mumbai, Maharashtra, India.' },
+        { q: 'What is the typical response time for student grievances?', a: 'We acknowledge tickets within 24 business hours and aim to resolve academic issues within 3–5 business days.' },
+        { q: 'How is student support operated?', a: 'Our student support and grievance desk operates online for learners across Mumbai and India via info@stockmarketmumbai.in.' },
       ]}
     />
   );
 }
-

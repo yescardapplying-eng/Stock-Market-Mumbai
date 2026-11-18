@@ -6,32 +6,19 @@ import LeadEnquiryModal from '@/components/popups/LeadEnquiryModal';
 import MouseCursorEffect from '@/components/ui/MouseCursorEffect';
 import ScrollAnimationObserver from '@/components/ui/ScrollAnimationObserver';
 import { LanguageProvider } from '@/context/LanguageContext';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://stockmarketmumbai.in';
+import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL, safeJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Stock Market Mumbai — Share Market Classes & Trading Education in Mumbai',
+    default: 'Online Stock Market Classes in Mumbai | Stock Market Mumbai',
     template: '%s | Stock Market Mumbai',
   },
   description:
-    'Stock Market Mumbai (stockmarketmumbai.in) offers 100% educational share market classes in Mumbai. Learn price action, technical analysis, option chain, and capital risk management with zero tips.',
-  keywords: [
-    'Stock Market Mumbai',
-    'Share market classes in Mumbai',
-    'Stock market course Mumbai',
-    'Trading classes in Mumbai',
-    'Technical analysis course Mumbai',
-    'Option chain course Mumbai',
-    'Stock market training institute Mumbai',
-    'Risk management trading Mumbai',
-    'Share market course Andheri Bandra Dadar Thane',
-    'Stock market education Mumbai',
-  ],
-  authors: [{ name: 'Stock Market Mumbai Academic Team' }],
-  creator: 'Stock Market Mumbai',
-  publisher: 'Stock Market Mumbai',
+    'Learn stock market trading online in Mumbai with structured courses covering market basics, technical analysis, price action, options concepts and risk management. Explore courses and fees.',
+  authors: [{ name: 'Stock Market Mumbai Editorial Team' }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   alternates: {
     canonical: SITE_URL,
   },
@@ -58,17 +45,17 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
   openGraph: {
-    title: 'Stock Market Mumbai — 100% Educational Trading Academy in Mumbai',
+    title: 'Online Stock Market Classes in Mumbai | Stock Market Mumbai',
     description:
-      'Learn structured technical analysis, option chain reading, and capital loss control in Mumbai. Pure education with zero stock tips.',
+      'Learn stock market trading online in Mumbai with structured courses covering market basics, technical analysis, price action, options concepts and risk management.',
     url: SITE_URL,
-    siteName: 'Stock Market Mumbai',
+    siteName: SITE_NAME,
     images: [
       {
-        url: '/images/brand/stock-market-mumbai-logo.png',
-        width: 1024,
-        height: 341,
-        alt: 'Stock Market Mumbai — Share Market Education',
+        url: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
+        width: 1200,
+        height: 630,
+        alt: 'Stock Market Mumbai — Online Stock Market Education for Mumbai Learners',
       },
     ],
     locale: 'en_IN',
@@ -76,10 +63,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Stock Market Mumbai — Trading Education in Mumbai',
+    title: 'Online Stock Market Classes in Mumbai | Stock Market Mumbai',
     description:
-      '100% educational share market courses in Mumbai. Master price action and capital risk control.',
-    images: ['/images/brand/stock-market-mumbai-logo.png'],
+      'Online stock market education for Mumbai learners covering market basics, technical analysis, option chain concepts, and risk management.',
+    images: [`${SITE_URL}${DEFAULT_OG_IMAGE}`],
   },
   robots: {
     index: true,
@@ -101,31 +88,33 @@ export default function RootLayout({
 }>) {
   const organizationSchema = {
     '@context': 'https://schema.org',
-    '@type': ['EducationalOrganization', 'LocalBusiness'],
-    name: 'Stock Market Mumbai',
+    '@type': 'Organization',
+    name: SITE_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/images/brand/stock-market-mumbai-logo.png`,
-    image: `${SITE_URL}/images/brand/stock-market-mumbai-icon.png`,
-    description:
-      '100% educational stock market training institute in Mumbai teaching price action, option chain concepts, and capital risk management.',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Mumbai',
-      addressRegion: 'Maharashtra',
-      addressCountry: 'IN',
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/images/brand/stock-market-mumbai-logo.png`,
+      width: 1024,
+      height: 341,
     },
-    areaServed: [
-      'Mumbai',
-      'South Mumbai',
-      'Bandra',
-      'Andheri',
-      'Dadar',
-      'Powai',
-      'Borivali',
-      'Thane',
-      'Navi Mumbai',
-    ],
+    description:
+      'Online stock market education platform serving learners in Mumbai, Maharashtra, India with courses on market basics, technical analysis, option chain concepts, and risk management.',
     email: 'info@stockmarketmumbai.in',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'admissions and student support',
+      email: 'info@stockmarketmumbai.in',
+      areaServed: 'IN',
+      availableLanguage: ['English', 'Hindi', 'Marathi'],
+    },
+  };
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: SITE_URL,
+    inLanguage: 'en-IN',
   };
 
   return (
@@ -137,7 +126,13 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema).replace(/</g, '\\u003c'),
+            __html: safeJsonLd(organizationSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: safeJsonLd(websiteSchema),
           }}
         />
         <LanguageProvider>
@@ -152,4 +147,3 @@ export default function RootLayout({
     </html>
   );
 }
-

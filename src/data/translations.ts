@@ -49,10 +49,10 @@ export const TRANSLATIONS: Record<LanguageCode, TranslationDict> = {
       close: 'Close',
     },
     hero: {
-      tagline: '100% Educational Platform • Mumbai',
-      heading: 'Master Stock Market Trading in Mumbai',
+      tagline: 'Online Stock Market Education • Mumbai Learners',
+      heading: 'Online Stock Market Classes in Mumbai for Beginners and Learners',
       subheading:
-        'Learn structured price action, option chain basics, and capital risk control in Mumbai. Pure trading education with zero tips or advisory.',
+        'Learn market basics, technical analysis, price action, option chain concepts, and disciplined risk management online from anywhere in Mumbai. Strictly educational with zero stock tips or advisory.',
       primaryCta: 'View Plans',
       secondaryCta: 'Apply Now',
     },
@@ -74,10 +74,10 @@ export const TRANSLATIONS: Record<LanguageCode, TranslationDict> = {
       close: 'Close',
     },
     hero: {
-      tagline: '100% एजुकेशनल प्लेटफॉर्म • मुंबई',
-      heading: 'मुंबई में सीखें स्टॉक मार्केट ट्रेडिंग',
+      tagline: 'ऑनलाइन स्टॉक मार्केट शिक्षा • मुंबई लर्नर्स',
+      heading: 'मुंबई के शुरुआती और लर्नर्स के लिए ऑनलाइन स्टॉक मार्केट क्लासेस',
       subheading:
-        'प्राइस एक्शन, ऑप्शन चेन और कैपिटल रिस्क कंट्रोल सीखें। 100% एजुकेशनल ट्रेनिंग — कोई टिप्स या एडवाइजरी नहीं।',
+        'मुंबई से घर बैठे ऑनलाइन मार्केट बेसिक्स, टेक्निकल एनालिसिस, प्राइस एक्शन, ऑप्शन चेन और रिस्क मैनेजमेंट सीखें। पूरी तरह शैक्षणिक — कोई स्टॉक टिप्स या एडवाइजरी नहीं।',
       primaryCta: 'View Plans',
       secondaryCta: 'Apply Now',
     },
@@ -99,10 +99,10 @@ export const TRANSLATIONS: Record<LanguageCode, TranslationDict> = {
       close: 'Close',
     },
     hero: {
-      tagline: '100% शैक्षणिक व्यासपीठ • मुंबई',
-      heading: 'मुंबईत शिका स्टॉक मार्केट ट्रेडिंग',
+      tagline: 'ऑनलाइन शेअर मार्केट शिक्षण • मुंबई विद्यार्थी',
+      heading: 'मुंबईतील नवशिक्यांसाठी ऑनलाइन स्टॉक मार्केट क्लासेस',
       subheading:
-        'प्राइस अ‍ॅक्शन, ऑप्शन चेन आणि कॅपिटल रिस्क कंट्रोल शिका. 100% शैक्षणिक प्रशिक्षण — कोणतेही टिप्स किंवा सल्ला नाही.',
+        'मुंबईतून ऑनलाइन मार्केट बेसिक्स, टेक्निकल अ‍ॅनालिसिस, प्राइस अ‍ॅक्शन, ऑप्शन चेन आणि रिस्क मॅनेजमेंट शिका. पूर्णपणे शैक्षणिक — कोणतेही टिप्स किंवा सल्ला नाही.',
       primaryCta: 'View Plans',
       secondaryCta: 'Apply Now',
     },

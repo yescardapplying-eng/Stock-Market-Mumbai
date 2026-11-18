@@ -1,16 +1,19 @@
 import type { Metadata } from 'next';
 import LegalPageLayout from '@/components/legal/LegalPageLayout';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Cookie Policy | Stock Market Mumbai',
-  description: 'Information on essential cookies and browser preferences used on stockmarketmumbai.in.',
-  alternates: { canonical: 'https://stockmarketmumbai.in/cookie-policy' },
-};
+  description:
+    'Cookie Policy detailing essential browser storage and preference technologies used on Stock Market Mumbai.',
+  path: '/cookie-policy',
+});
 
 export default function Page() {
   return (
     <LegalPageLayout
       title="Cookie Policy"
+      path="/cookie-policy"
       lastUpdated="November 2026"
       sections={[
         {
@@ -18,8 +21,8 @@ export default function Page() {
           content: <p>Stock Market Mumbai uses minimal essential storage for language preference, smooth navigation, and site security.</p>,
         },
         {
-          title: 'Analytics & Performance',
-          content: <p>Aggregated performance metrics help improve page load speed across Mumbai mobile and desktop networks.</p>,
+          title: 'Performance & Reliability',
+          content: <p>Basic browser and server diagnostics help keep pages responsive across mobile and desktop devices.</p>,
         },
         {
           title: 'Managing Cookies',
@@ -34,4 +37,3 @@ export default function Page() {
     />
   );
 }
-

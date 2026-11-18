@@ -1,16 +1,19 @@
 import type { Metadata } from 'next';
 import LegalPageLayout from '@/components/legal/LegalPageLayout';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Refund & Cancellation Policy | Stock Market Mumbai',
-  description: 'Transparent fee, refund, and plan upgrade terms for Stock Market Mumbai programs.',
-  alternates: { canonical: 'https://stockmarketmumbai.in/refund-and-cancellation' },
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Refund and Cancellation Policy | Stock Market Mumbai',
+  description:
+    'Refund and Cancellation Policy outlining eligibility, cancellation review window, plan upgrades and refund timelines at Stock Market Mumbai.',
+  path: '/refund-and-cancellation',
+});
 
 export default function Page() {
   return (
     <LegalPageLayout
-      title="Refund & Cancellation Policy"
+      title="Refund and Cancellation Policy"
+      path="/refund-and-cancellation"
       lastUpdated="November 2026"
       sections={[
         {
@@ -34,4 +37,3 @@ export default function Page() {
     />
   );
 }
-

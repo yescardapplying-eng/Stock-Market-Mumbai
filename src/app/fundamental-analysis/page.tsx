@@ -1,17 +1,16 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import EducationalTopicPageView from '@/components/educational/EducationalTopicPageView';
 import { EDUCATIONAL_TOPICS } from '@/data/educationalTopics';
+import { buildPageMetadata } from '@/lib/seo';
 
 const topic = EDUCATIONAL_TOPICS['fundamental-analysis'];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: topic.seoTitle,
   description: topic.seoDescription,
-  keywords: topic.keywords,
-  alternates: { canonical: `https://stockmarketmumbai.in/${topic.slug}` },
-};
+  path: '/' + topic.slug,
+});
 
 export default function Page() {
   return <EducationalTopicPageView topic={topic} />;
 }
-

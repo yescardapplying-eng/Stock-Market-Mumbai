@@ -61,7 +61,7 @@ export default function WhatYouWillLearn() {
             What You Will Learn
           </h2>
           <p className="mt-3 text-sm sm:text-base text-[#1E293B]/80">
-            Practical, 100% educational modules built to protect your trading capital.
+            Structured online modules taught progressively across our Basic, Our Pro, and Ultra Pro plans.
           </p>
         </div>
 

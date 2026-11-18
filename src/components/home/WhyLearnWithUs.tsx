@@ -5,22 +5,22 @@ const REASONS = [
   {
     icon: ShieldAlert,
     title: 'Zero Tips Policy',
-    desc: 'Strictly non-advisory learning. No buy/sell calls or Telegram alerts ever.',
+    desc: 'Strictly educational and non-advisory. No stock tips, buy/sell calls, or signal groups.',
   },
   {
     icon: Compass,
-    title: 'Capital Loss Control',
-    desc: 'Every lesson prioritizes mathematical stop-loss and position sizing first.',
+    title: 'Risk Awareness First',
+    desc: 'Lessons emphasize position sizing, stop-loss concepts, and understanding market risk.',
   },
   {
     icon: Users,
-    title: 'Mumbai Faculty',
-    desc: 'Interactive English, Hindi, and Marathi cohorts tailored for Mumbai learners.',
+    title: 'Online For Mumbai',
+    desc: 'Structured online cohorts designed for beginners and working professionals in Mumbai.',
   },
   {
     icon: Award,
-    title: 'Verified Certificate',
-    desc: 'Structured curriculum completion certificate with recorded lecture backups.',
+    title: 'Completion Certificate',
+    desc: 'Syllabus completion certificate paired with recorded revision access during active plans.',
   },
 ];
 

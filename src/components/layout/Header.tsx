@@ -80,7 +80,7 @@ export default function Header() {
           <div className="flex items-center gap-1.5 truncate">
             <ShieldCheck className="w-3.5 h-3.5 text-[#16A34A] shrink-0" aria-hidden="true" />
             <span className="truncate">
-              Stock Market Mumbai — 100% Educational Platform | Mumbai, Maharashtra | Non-Advisory
+              Stock Market Mumbai — Online Stock Market Education for Mumbai Learners | Non-Advisory
             </span>
           </div>
           <div className="hidden sm:flex items-center gap-4 shrink-0 text-slate-300">
@@ -108,7 +108,7 @@ export default function Header() {
               <div className="relative brand-logo-header flex items-center">
                 <Image
                   src="/images/brand/stock-market-mumbai-logo.png"
-                  alt="Stock Market Mumbai — Stock Market Education"
+                  alt="Stock Market Mumbai logo"
                   width={1024}
                   height={341}
                   priority
