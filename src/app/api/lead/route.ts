@@ -23,6 +23,15 @@ export async function POST(req: NextRequest) {
         : 'Above Rs 50,000';
     const sourcePage =
       body.source_page || body.sourcePage ? String(body.source_page || body.sourcePage).trim() : '/';
+    const targetLocation =
+      body.target_location || body.targetLocation
+        ? String(body.target_location || body.targetLocation).trim()
+        : null;
+    const leadMessage = targetLocation
+      ? `Location Inquiry: ${targetLocation}${body.message ? ` | ${body.message}` : ''}`
+      : body.message
+      ? String(body.message).trim()
+      : null;
 
     if (!fullName || fullName.length < 2) {
       return NextResponse.json(
@@ -56,6 +65,7 @@ export async function POST(req: NextRequest) {
       state,
       segment,
       capital_range: capitalRange,
+      message: leadMessage,
       source_page: sourcePage,
       ip_address: ipAddress,
       user_agent: userAgent,

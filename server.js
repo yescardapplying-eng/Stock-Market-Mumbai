@@ -26,7 +26,7 @@ app.prepare().then(() => {
       console.error(err);
       process.exit(1);
     })
-    .listen(port, () => {
+    .listen(port, hostname, () => {
       console.log(`> Stock Market Mumbai is running on http://${hostname}:${port}`);
     });
 });

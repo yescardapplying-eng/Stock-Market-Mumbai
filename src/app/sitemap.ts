@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { BLOG_POSTS } from '@/data/blogArticles';
+import { getAllLocationLandingPages } from '@/data/locationLandingPages';
 import { SITE_URL } from '@/lib/seo';
 
 const LAST_CONTENT_UPDATE = '2026-11-18';
@@ -10,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const mainPages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'weekly', priority: 1.0 },
     { url: `${baseUrl}/our-services`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${baseUrl}/service-areas`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/about-us`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/our-packages`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${baseUrl}/contact-us`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'monthly', priority: 0.8 },
@@ -80,12 +82,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.4,
   }));
 
+  const locationPages: MetadataRoute.Sitemap = getAllLocationLandingPages().map((item) => ({
+    url: `${baseUrl}/stock-market-classes-in-${item.slug}`,
+    lastModified: new Date().toISOString().split('T')[0],
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
   return [
     ...mainPages,
     ...educationalPages,
     ...toolsPages,
     ...resourcePages,
     ...blogPages,
+    ...locationPages,
     ...legalPages,
   ];
 }

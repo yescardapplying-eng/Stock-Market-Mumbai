@@ -154,6 +154,16 @@ export default function LeadEnquiryModal() {
     setStatus('submitting');
 
     try {
+      let targetLocation: string | null = null;
+      const currentPath =
+        typeof window !== 'undefined' ? window.location.pathname : pathname || '/';
+      if (currentPath.includes('/stock-market-classes-in-')) {
+        const parts = currentPath.split('/stock-market-classes-in-');
+        if (parts[1]) {
+          targetLocation = parts[1].replace(/\/$/, '').replace(/-/g, ' ').toUpperCase();
+        }
+      }
+
       const response = await fetch(API_ENDPOINTS.LEAD, {
         method: 'POST',
         headers: {
@@ -166,7 +176,8 @@ export default function LeadEnquiryModal() {
           state: selectedState || null,
           segment: segment || 'Option (Call-Put)',
           capital_range: capitalRange || 'Above Rs 50,000',
-          source_page: typeof window !== 'undefined' ? window.location.pathname : '/',
+          source_page: currentPath,
+          target_location: targetLocation,
         }),
       });
 

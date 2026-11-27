@@ -32,11 +32,16 @@ export default function Footer() {
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Online stock market education for Mumbai learners. Learn market basics, price action, option chain concepts, and risk management without stock tips or advisory noise.
             </p>
-            <div className="pt-1 text-xs">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#13345E] text-[#22C55E] font-semibold border border-[#16A34A]/30">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />
-                Online Educational Platform
-              </span>
+            <div className="pt-1 text-xs space-y-2">
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#13345E] text-[#22C55E] font-semibold border border-[#16A34A]/30">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />
+                  Online Educational Platform
+                </span>
+              </div>
+              <p className="text-[11px] text-[#4ADE80] font-medium leading-tight">
+                Serving 320+ Major Financial &amp; Stock Market Training Hubs across 14 States All Over India
+              </p>
             </div>
           </div>
 
@@ -52,6 +57,11 @@ export default function Footer() {
               <li>
                 <Link href="/our-services" className="hover:text-[#22C55E] transition-colors">
                   Our Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/service-areas" className="hover:text-[#22C55E] transition-colors font-medium text-[#4ADE80]">
+                  Service Areas (320+ Hubs)
                 </Link>
               </li>
               <li>

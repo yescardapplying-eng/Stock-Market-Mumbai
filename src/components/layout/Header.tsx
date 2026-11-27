@@ -55,10 +55,11 @@ export default function Header() {
     };
   }, [mobileMenuOpen]);
 
-  // Exact 5 required header navigation items in user's exact order
+  // Exact header navigation items
   const navLinks = [
     { name: t.nav.home, href: '/' },
     { name: t.nav.services, href: '/our-services' },
+    { name: 'Service Areas', href: '/service-areas' },
     { name: t.nav.about, href: '/about-us' },
     { name: t.nav.packages, href: '/our-packages' },
     { name: t.nav.contact, href: '/contact-us' },
